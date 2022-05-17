@@ -1,12 +1,13 @@
 # javaagent-xxtea-bytecode-encrypt
 java字节码加密解密及agent接入
 
-1.create C++ project import nativefiles and build
+1.create C++ project import nativefiles change the pkgNames and build
 
 2.put the cppDLL file to jvm lib path
 
 3.Java:import dll
 
+```java
 public class ByteCodeEncryptor {
 	static {
 		System.loadLibrary("your C++ dll name");
@@ -14,9 +15,11 @@ public class ByteCodeEncryptor {
 	public native static byte[] encrypt(byte[] text);
 	public native static byte[] decrypt(byte[] text);
 }
+```
 
 4.Java:Encrypt jar
 
+```java
 public class main {
 	public static void main(String[] args) {
 		jarEncrypt("D://test.jar","D://test-d.jar");
@@ -60,6 +63,7 @@ public class main {
 	    }
 	  }
 }
+```
 
 5.jvm option 
 
@@ -68,13 +72,16 @@ public class main {
 RUN: java -agentlib:yourCppDLLname  -jar  encryptedFile.jar
 
 --IF jvm -javaagent:yourAgentJar
-  
-MANIFEST.MF
-  Manifest-Version: 1.0
-  Premain-Class: helloworld.VmAgent
-  Sealed: true
 
- 
+MANIFEST.MF
+
+```
+ Manifest-Version: 1.0
+ Premain-Class: helloworld.VmAgent
+ Sealed: true
+```
+
+```java
 public class VmAgent {
 	public static void premain(String agentArgs,Instrumentation inst) {
 		System.out.print("VMAgent");
@@ -94,12 +101,13 @@ public class VmAgent {
 		              }
 				}
 				return null;
-				
 			}
 		});
 	}
+
 }
- 
+```
+
 RUN: java -javaagent:yourAgentJar  -jar encryptedFile.jar
 
 
