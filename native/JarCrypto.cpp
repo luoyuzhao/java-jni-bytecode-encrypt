@@ -59,7 +59,6 @@ void JNICALL ClassDecryptCallback(
 JNIEXPORT jint JNICALL Agent_OnLoad(JavaVM* vm, char* options, void* reserved)
 {
 	printf("Agent_OnLoad\n");
-	printf(options);
 	jvmtiEnv* jvmti;
 	//Create the JVM TI environment(jvmti)
 	jint ret = vm->GetEnv((void**)&jvmti, JVMTI_VERSION);
