@@ -34,7 +34,8 @@ void JNICALL ClassDecryptCallback(
 	jint* new_class_data_len,
 	unsigned char** new_class_data)
 {
-	if (name && strncmp(name, "helloworld", 10) == 0) {
+	//cafebabe---*.class
+	if (name && class_data[0] != 0xca && class_data[1] != 0xfe && class_data[2] != 0xba && class_data[3] != 0xbe) {
 		size_t len;
 		unsigned char* decrypt_data = (unsigned char*)xxtea_decrypt(class_data, class_data_len, key, &len);
 		*new_class_data_len = len;
