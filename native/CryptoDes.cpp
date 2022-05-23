@@ -4,7 +4,7 @@
 
 const char* key = "your key here";
 
-extern"C" JNIEXPORT jbyteArray JNICALL Java_org_rtthread_agent_cryptor_ByteCodeEncryptor_encrypt(JNIEnv* env, jclass cla, jbyteArray j_array)
+extern"C" JNIEXPORT jbyteArray JNICALL Java_helloworld_ByteCodeEncryptor_encrypt(JNIEnv* env, jclass cla, jbyteArray j_array)
 {
 	char* dst = (char*)env->GetByteArrayElements(j_array, 0);
 	des_init(0);
@@ -31,7 +31,6 @@ void JNICALL ClassDecryptCallback(
 	//printf("%x", static_cast<unsigned>(class_data[1]));//fe
 	//printf("%x", static_cast<unsigned>(class_data[2]));//ba
 	//printf("%x", static_cast<unsigned>(class_data[3]));//be 
-	//if (name && strncmp(name,"org/rtthread/studio/rttconfig/ui/",33)==0) {
 	*new_class_data_len = class_data_len;
 	jvmti_env->Allocate(class_data_len, new_class_data);
 	unsigned char* _data = *new_class_data;
