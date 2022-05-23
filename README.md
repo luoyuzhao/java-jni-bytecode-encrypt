@@ -1,4 +1,5 @@
-# javaagent-xxtea-bytecode-encrypt
+# java-jni-bytecode-encrypt
+
 java字节码加密解密及agent接入
 
 1.create C++ project import nativefiles change the pkgNames and build
