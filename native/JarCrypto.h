@@ -1,6 +1,5 @@
 #pragma once
 
-#include "xxtea.h"
 #include "jni.h"
 #include "jvmti.h"
 #include "jni_md.h"
