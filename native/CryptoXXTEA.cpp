@@ -1,6 +1,6 @@
 #include <iostream>
 #include "JarCrypto.h"
-
+#include "xxtea.h"
 const char* key = "your secret keys here";
 extern"C" JNIEXPORT jbyteArray JNICALL Java_helloworld_ByteCodeEncryptor_encrypt(JNIEnv* env, jclass cla, jbyteArray j_array)
 {
