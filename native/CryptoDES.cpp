@@ -14,7 +14,16 @@ extern"C" JNIEXPORT jbyteArray JNICALL Java_helloworld_ByteCodeEncryptor_encrypt
 	env->SetByteArrayRegion(j_array, 0, strlen(dst), (jbyte*)dst);
 	return j_array;
 }
-
+extern"C" JNIEXPORT jbyteArray JNICALL Java_helloworld_ByteCodeEncryptor_decrypt(JNIEnv* env, jclass cla, jbyteArray j_array)
+{
+	char* dst = (char*)env->GetByteArrayElements(j_array, 0);
+	des_init(0);
+	des_set_key((char*)key);
+	des_decrypt(dst);
+	//des_done();
+	env->SetByteArrayRegion(j_array, 0, strlen(dst), (jbyte*)dst);
+	return j_array;
+}
 void JNICALL ClassDecryptCallback(
 	jvmtiEnv* jvmti_env,
 	JNIEnv* jni_env,
@@ -42,7 +51,7 @@ void JNICALL ClassDecryptCallback(
 		des_init(0);
 		des_set_key((char*)key);
 		des_decrypt((char*)_data);
-		des_done();
+		//des_done();
 	}
 	else {
 		for (int i = 0; i < class_data_len; i++)
