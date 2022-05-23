@@ -6,7 +6,7 @@ java字节码加密解密及agent接入
 
 2.put the cppDLL file to jvm lib path
 
-3.Java:import dll
+3.Java:import dll(JNI-CALL)
 
 ```java
 public class ByteCodeEncryptor {
@@ -18,7 +18,7 @@ public class ByteCodeEncryptor {
 }
 ```
 
-4.Java:Encrypt jar
+4.Java:Encrypt jar(-加密一个原始jar包-加密后jar包)
 
 ```java
 public class main {
@@ -66,14 +66,14 @@ public class main {
 }
 ```
 
-5.jvm option 
+5.
+jvm option 
 
---IF jvm -agentlib:yourCppDLLname
+--方式一 jvm -agentlib:yourCppDLLname  (在C中解密直接使用dll)
 
-RUN: java -agentlib:yourCppDLLname  -jar  encryptedFile.jar
+RUN: java -agentlib:yourCppDLLname  -jar  encryptedFile.jar(加密后的jar)
 
---IF jvm -javaagent:yourAgentJar
-
+--方式二 jvm -javaagent:yourAgentJar  (在Java中解密处理premain)
 MANIFEST.MF
 
 ```
